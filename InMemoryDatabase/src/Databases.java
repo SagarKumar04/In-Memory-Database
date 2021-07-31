@@ -6,10 +6,21 @@ public class Databases {
 
     static {
         scanner = new Scanner(System.in);
+        ArrayList<String> sagarDatabase = new ArrayList<String>();
+        sagarDatabase.add("database1");
+        sagarDatabase.add("database2");
 
-        databases.put("sagar", new ArrayList<>());
-        databases.put("moni", new ArrayList<>());
-        databases.put("puja", new ArrayList<>());
+        ArrayList<String> moniDatabase = new ArrayList<String>();
+        moniDatabase.add("database3");
+        moniDatabase.add("database4");
+        moniDatabase.add("database5");
+
+        ArrayList<String> pujaDatabase = new ArrayList<String>();
+        pujaDatabase.add("database6");
+
+        databases.put("sagar", sagarDatabase);
+        databases.put("moni", moniDatabase);
+        databases.put("puja", pujaDatabase);
         databases.put("khushi", new ArrayList<>());
         databases.put("shubham", new ArrayList<>());
     }
@@ -46,17 +57,19 @@ public class Databases {
     private void createDatabase(String loggedInUser) {
         System.out.println("Enter database name: ");
         String databaseName = scanner.next();
-        List<String> currentUsersDatabase = databases.get(loggedInUser);
+        ArrayList<String> currentUsersDatabase = databases.get(loggedInUser);
         if(currentUsersDatabase.contains(databaseName)) {
             System.out.println("Databases with the name '" + databaseName + "' already exists.");
         }
         else {
             currentUsersDatabase.add(databaseName);
+            databases.put(loggedInUser, currentUsersDatabase);
         }
     }
 
     private void readDatabase(String loggedInUser) {
-        List<String> currentUsersDatabase = databases.get(loggedInUser);
+        System.out.println("dataabses: " + databases);
+        ArrayList<String> currentUsersDatabase = databases.get(loggedInUser);
         if(currentUsersDatabase.size() > 0) {
             System.out.println("Databases are: ");
             for(String database : currentUsersDatabase) {
@@ -73,6 +86,7 @@ public class Databases {
         String databaseName = scanner.next();
         ArrayList<String> currentUsersDatabase = databases.get(loggedInUser);
         if(currentUsersDatabase.contains(databaseName)) {
+            databaseSelected = databaseName;
             Tables tables = new Tables();
             int usersChoice = 0;
 
